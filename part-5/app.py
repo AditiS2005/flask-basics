@@ -87,28 +87,39 @@ def project_detail(project_id):
 def contact():
     return render_template('contact.html', info=PERSONAL_INFO)
 
+
 @app.route('/blog')
 def blog():
-    return render_template(
-        'blog.html',
-        info=PERSONAL_INFO,
-        posts=BLOG_POSTS
-    )
+    return render_template('blog.html', info=PERSONAL_INFO, posts=BLOG_POSTS)
 
 @app.route('/skill/<skill_name>')
 def skill(skill_name):
-    related_projects = [
-        project for project in PROJECTS
-        if skill_name in project['tech']
-    ]
+    # Convert 'HTML-CSS' back to 'HTML/CSS' for matching
+    original_skill_name = skill_name.replace('-', '/')
+    
+    # Use lowercase for safer matching
+    search_term = original_skill_name.lower()
+    
+    related_projects = []
+    for project in PROJECTS:
+        # Create a lowercase version of tags for comparison
+        project_tech_lowered = [t.lower() for t in project['tech']]
+        
+        # Check if the skill matches
+        if search_term in project_tech_lowered:
+            related_projects.append(project)
+        elif search_term == "sql" and "sqlite" in project_tech_lowered:
+            related_projects.append(project)
+        # Special check: if the skill is HTML/CSS, match projects that have 'HTML' or 'CSS'
+        elif search_term == "html/css" and ("html" in project_tech_lowered or "css" in project_tech_lowered):
+            related_projects.append(project)
 
     return render_template(
         'skill.html',
         info=PERSONAL_INFO,
-        skill=skill_name,
+        skill_name=original_skill_name, # Display the nice "HTML/CSS" name
         projects=related_projects
     )
-
 
 if __name__ == '__main__':
     app.run(debug=True)

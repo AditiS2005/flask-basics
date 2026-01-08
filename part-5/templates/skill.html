@@ -20,6 +20,7 @@
             
             <div class="tech-tags">
                 {% for tech in project.tech %}
+<<<<<<< HEAD
                     <a href="{{ url_for('skill', skill_name=tech) }}" style="text-decoration: none;">
                         <span class="tech-tag {% if tech.lower() == skill_name.lower() %}highlight{% endif %}">
                             {{ tech }}
@@ -27,6 +28,14 @@
                     </a>
                 {% endfor %}
             </div>
+=======
+                    <span class="tech-tag {% if tech.lower() == skill_name.lower() %}highlight{% endif %}">
+                        {{ tech }}
+                    </span>
+                {% endfor %}
+            </div>
+            
+>>>>>>> 75959308eb8c7121d80e212da4f8cc71e780f610
             <div style="margin-top: 15px;">
                 <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn btn-primary">
                     View Project

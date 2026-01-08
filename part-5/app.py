@@ -87,6 +87,28 @@ def project_detail(project_id):
 def contact():
     return render_template('contact.html', info=PERSONAL_INFO)
 
+@app.route('/blog')
+def blog():
+    return render_template(
+        'blog.html',
+        info=PERSONAL_INFO,
+        posts=BLOG_POSTS
+    )
+
+@app.route('/skill/<skill_name>')
+def skill(skill_name):
+    related_projects = [
+        project for project in PROJECTS
+        if skill_name in project['tech']
+    ]
+
+    return render_template(
+        'skill.html',
+        info=PERSONAL_INFO,
+        skill=skill_name,
+        projects=related_projects
+    )
+
 
 @app.route('/blog')
 def blog():

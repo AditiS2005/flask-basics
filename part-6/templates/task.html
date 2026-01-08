@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    {% if task %}
+        <h2>Task Details</h2>
+        <h1>{{ task.title }}</h1>
+        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p><strong>Current Status:</strong> {{ task.status }}</p>
+        <br>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to List</a>
+    {% else %}
+        <h2>Task not found!</h2>
+    {% endif %}
+</div>
+{% endblock %}

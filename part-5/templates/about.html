@@ -34,9 +34,11 @@
         <strong>For Loop Magic:</strong>
         <p>The skills above are rendered using a Jinja2 for loop:</p>
         <code style="display: block; margin-top: 10px; background: #edf2f7; padding: 10px; border-radius: 5px;">
-            {&percnt; for skill in skills &percnt;}<br>
-            &nbsp;&nbsp;{{ skill.name }} - {{ skill.level }}&percnt;<br>
-            {&percnt; endfor &percnt;}
+            {% raw %}
+                {% for skill in skills %}
+                    {{ skill.name }} - {{ skill.level }}%
+                {% endfor %}
+            {% endraw %}
         </code>
     </div>
 </div>
@@ -48,8 +50,9 @@
         <li>Python & Flask for backend development</li>
         <li>HTML, CSS, and JavaScript for frontend</li>
         <li>Database management with SQL</li>
-        <li>Version control with Git</li>
+        <!-- <li>Version control with Git</li> -->
         <li>RESTful API design</li>
+        <li>C, C++ Programming</li>
     </ul>
 </div>
 {% endblock %}

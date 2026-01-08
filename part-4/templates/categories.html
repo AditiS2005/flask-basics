@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 5px;
+        }
+        nav a {
+            margin-right: 15px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+        <a href="/links">URL Builder</a>
+        <a href="{{ url_for('product') }}">Products</a>
+        <a href="{{ url_for('show_categories') }}">Categories</a>
+    </nav>
+
+    <h2>Categories</h2>
+
+    {% for category, product_ids in categories.items() %}
+        <h3>{{ category.replace('_', ' ').title() }}</h3>
+        <ul>
+            {% for pid in product_ids %}
+                <li>
+                    <a href="{{ url_for('category_product',
+                                        category_name=category,
+                                        product_id=pid) }}">
+                        View Product {{ pid }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</div>
+
+</body>
+</html>

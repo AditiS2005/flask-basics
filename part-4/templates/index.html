@@ -32,6 +32,33 @@
             font-weight: bold;
         }
         nav a:hover { color: #2b6cb0; }
+
+        .search-box {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .search-box input {
+            padding: 10px;
+            width: 65%;
+            border-radius: 5px;
+            border: 1px solid #cbd5e0;
+        }
+        .search-box button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-box button:hover {
+            background: #3182ce;
+        }
+
         .route-demo {
             background: #ebf8ff;
             border: 2px solid #90cdf4;
@@ -83,10 +110,22 @@
             <a href="/">Home</a>
             <a href="/about/">About</a>
             <a href="/links">URL Builder</a>
+            <a href="/product">Products</a>
+            <a href="/categories">Categories</a>
         </nav>
 
         <h1>Dynamic Routes in Flask</h1>
         <p>Learn how to capture values from URLs using <code>&lt;variable&gt;</code> syntax!</p>
+
+        <!-- 🔍 SEARCH BOX (Exercise 4.3) -->
+        <div class="search-box">
+            <h3>Search Demo</h3>
+            <form action="{{ url_for('search') }}" method="get">
+                <input type="text" name="query" placeholder="Search here..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <!-- 🔍 END SEARCH BOX -->
 
         <!-- User Profile Demo -->
         <div class="route-demo">

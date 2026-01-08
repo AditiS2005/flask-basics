@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Flask Templates</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 50px auto;
             padding: 20px;
             background-color: #f5f5f5;
@@ -18,7 +19,7 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        h1 {
+        h1, h2, h3 {
             color: #333;
         }
         nav {
@@ -28,6 +29,7 @@
             margin-right: 15px;
             color: #007bff;
             text-decoration: none;
+            font-weight: bold;
         }
         nav a:hover {
             text-decoration: underline;
@@ -37,40 +39,137 @@
             padding: 15px;
             border-radius: 5px;
             border-left: 4px solid #007bff;
+            margin: 20px 0;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        .info-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- Navigation -->
-        <nav>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-        </nav>
+<div class="container">
 
-        <h1>Welcome to Flask Templates!</h1>
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
 
-        <p>This page is being served from an HTML file in the <code>templates/</code> folder.</p>
+    <h1>Welcome Aditi to Flask Templates 🚀</h1>
 
-        <div class="highlight">
-            <strong>What's happening?</strong>
-            <p>When you visit this URL, Flask:</p>
-            <ol>
-                <li>Receives your browser's request</li>
-                <li>Matches the URL to the <code>@app.route('/')</code></li>
-                <li>Calls the <code>home()</code> function</li>
-                <li>Loads <code>templates/index.html</code></li>
-                <li>Sends this HTML back to your browser</li>
-            </ol>
-        </div>
+    <p>
+        This page is delivered from an HTML file stored inside the
+        <code>templates/</code> folder, which acts as Flask’s design workspace.
+        While Flask manages the application flow in Python, the
+        <strong>render_template()</strong> function works as a bridge
+        between backend logic and frontend presentation.
+    </p>
 
-        <h2>Why Use Templates?</h2>
+    <div class="highlight">
+        <strong>What happens when you open this page?</strong>
+        <ol>
+            <li>Your browser sends a request to the Flask server</li>
+            <li>Flask matches the URL (<code>/</code>) with a route</li>
+            <li>The <code>home()</code> function is executed</li>
+            <li><code>index.html</code> is loaded from the templates folder</li>
+            <li>The final HTML is sent back to your browser</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Project Overview</h2>
+        <p>
+            This project demonstrates how Flask connects Python code
+            with HTML templates to create clean, structured web pages.
+            It is designed for beginners who want to understand backend
+            fundamentals before moving to advanced features.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Basic Flask Route Example</h2>
+        <pre>
+@app.route('/')
+def home():
+    return render_template('index.html')
+        </pre>
+    </div>
+
+    <div class="info-box">
+        <strong>Learning Goal:</strong>
+        <p>
+            Understand how Flask routes, templates, and requests
+            work together to generate dynamic web pages.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Why Flask Uses Templates?</h2>
         <ul>
             <li><strong>Separation of Concerns:</strong> Python handles logic, HTML handles presentation</li>
-            <li><strong>Easier to Maintain:</strong> Edit HTML without touching Python code</li>
-            <li><strong>Reusability:</strong> Same template can be used with different data</li>
-            <li><strong>Jinja2 Power:</strong> We can add Python-like logic to HTML (next part!)</li>
+            <li><strong>Easy Maintenance:</strong> UI can be updated without changing backend code</li>
+            <li><strong>Reusability:</strong> Same template can display different data</li>
+            <li><strong>Jinja2 Power:</strong> Supports variables, loops, and conditions</li>
         </ul>
     </div>
+
+    <div class="section">
+        <h2>Best Practices for Beginners</h2>
+        <ul>
+            <li>Always store HTML files inside the <code>templates/</code> folder</li>
+            <li>Keep route names simple and meaningful</li>
+            <li>Use template inheritance to avoid repetition</li>
+            <li>Test each route after creating it</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>What You’ll Learn Next ⏭️</h2>
+        <ul>
+            <li>Passing data from Flask to HTML</li>
+            <li>Using variables inside templates</li>
+            <li>Loops and conditional statements in HTML</li>
+            <li>Template inheritance with base templates</li>
+            <li>Using static files (CSS & JS)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Next Project Ideas 💡</h2>
+        <ul>
+            <li>Student information system</li>
+            <li>Simple blog website</li>
+            <li>Contact form with validation</li>
+            <li>Mini dashboard application</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Flask Templates Practice – Exercise 2.1</p>
+    </footer>
+
+</div>
 </body>
 </html>

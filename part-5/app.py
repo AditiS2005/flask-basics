@@ -18,20 +18,20 @@ app = Flask(__name__)
 # =============================================================================
 
 PERSONAL_INFO = {
-    'name': 'Your Name',
+    'name': 'Aditi Gite',
     'title': 'Web Developer',
     'bio': 'A passionate developer learning Flask and web development.',
-    'email': 'your.email@example.com',
-    'github': 'https://github.com/yourusername',
-    'linkedin': 'https://linkedin.com/in/yourusername',
+    'email': 'aditigite2005@gmail.com',
+    'github': 'https://github.com/AditiS2005',
+    'linkedin': 'https://www.linkedin.com/in/aditi-gite-00994432b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
 }
 
 SKILLS = [
     {'name': 'Python', 'level': 80},
     {'name': 'HTML/CSS', 'level': 75},
-    {'name': 'Flask', 'level': 60},
+    {'name': 'Flask', 'level': 50},
     {'name': 'JavaScript', 'level': 50},
-    {'name': 'SQL', 'level': 45},
+    {'name': 'SQL', 'level': 80},
 ]
 
 PROJECTS = [
@@ -40,7 +40,20 @@ PROJECTS = [
     {'id': 3, 'name': 'Weather Dashboard', 'description': 'Display weather data from an API.', 'tech': ['Python', 'Flask', 'API'], 'status': 'Planned'},
 ]
 
-
+BLOG_POSTS = [
+    {
+        'id': 1,
+        'title': 'Why I Started Learning Flask',
+        'content': 'Flask helped me understand backend development step by step.',
+        'date': 'Jan 2026'
+    },
+    {
+        'id': 2,
+        'title': 'My First API Project',
+        'content': 'Working with APIs taught me how real-world applications fetch data.',
+        'date': 'Jan 2026'
+    }
+]
 # =============================================================================
 # ROUTES
 # =============================================================================
@@ -73,6 +86,28 @@ def project_detail(project_id):
 @app.route('/contact')
 def contact():
     return render_template('contact.html', info=PERSONAL_INFO)
+
+@app.route('/blog')
+def blog():
+    return render_template(
+        'blog.html',
+        info=PERSONAL_INFO,
+        posts=BLOG_POSTS
+    )
+
+@app.route('/skill/<skill_name>')
+def skill(skill_name):
+    related_projects = [
+        project for project in PROJECTS
+        if skill_name in project['tech']
+    ]
+
+    return render_template(
+        'skill.html',
+        info=PERSONAL_INFO,
+        skill=skill_name,
+        projects=related_projects
+    )
 
 
 if __name__ == '__main__':

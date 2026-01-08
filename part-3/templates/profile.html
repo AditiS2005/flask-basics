@@ -80,7 +80,8 @@
             <a href="/">Home</a>
             <a href="/profile">Profile</a>
             <a href="/skills">Skills</a>
-            <a href="/projects">Projects</a>
+            <a href="/grades">Grades</a>
+            <!--<a href="/projects">Projects</a>-->
         </nav>
 
         <h1>User Profile</h1>
@@ -104,6 +105,23 @@
                     <span class="badge badge-warning">Not Enrolled</span>
                 {% endif %}
             </div>
+            <div class="profile-item">
+                <span>Email:</span> {{ email }}
+            </div>
+
+            <div class="profile-item">
+                <span>City:</span> {{ city }}
+            </div>
+
+            <div class="profile-item">
+                <span>Status:</span>
+                {% if is_enrolled %}
+                    <span class="badge badge-success">Enrolled</span>
+                {% else %}
+                    <span class="badge badge-warning">Not Enrolled</span>
+                {% endif %}
+            </div>
+
         </div>
 
         <h2>How It Works</h2>
@@ -111,8 +129,8 @@
 
         <div class="code-example">
 return render_template('profile.html',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;name='Sarah',<br>
-&nbsp;&nbsp;&nbsp;&nbsp;age=22,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name='Aditi',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;age=20,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;course='Web Development',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;is_enrolled=True)
         </div>

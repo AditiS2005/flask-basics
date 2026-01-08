@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+</head>
+<body style="font-family: Arial; text-align:center; margin-top:80px;">
+
+<h2>Search Results</h2>
+
+<p>Search results for: <strong>{{ query }}</strong></p>
+
+<hr style="width:300px;">
+
+{% if results and results|length > 0 %}
+    <h3>Results:</h3>
+    <ul style="list-style:none; padding:0;">
+        {% for item in results %}
+            <li style="margin:10px;">
+                <a href="#" style="color:blue; text-decoration:none;">
+                    🔗 {{ item }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p style="color:red;">No results found.</p>
+{% endif %}
+
+<br>
+<a href="/">⬅ Back</a>
+
+</body>
+</html>

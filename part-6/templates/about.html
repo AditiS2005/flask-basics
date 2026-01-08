@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2>About TaskMaster</h2>
+    <p>This is a simple To-Do application built to practice Flask routing, Jinja2 loops, and template inheritance.</p>
+    <p>Version: 1.0.0</p>
+</div>
+<div class="card">
+    <h3>Project Details</h3>
+    <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+        <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 10px;"><strong>Framework</strong></td>
+            <td style="padding: 10px;">
+                Flask (Python) <br>
+                <small style="color: #666;">Used as the core backend engine to handle URL routing and server-side logic.</small>
+            </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 10px;"><strong>Templating</strong></td>
+            <td style="padding: 10px;">
+                Jinja2 <br>
+                <small style="color: #666;">Enables dynamic content rendering and template inheritance for a consistent UI.</small>
+            </td>
+        </tr>
+        
+        <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 10px;"><strong>Styling</strong></td>
+            <td style="padding: 10px;">
+                Custom CSS3 (Grid & Flexbox) <br>
+                <small style="color: #666;">Powers the responsive task dashboard and modern card-based layout design.</small>
+            </td>
+        </tr>
+
+        <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 10px;"><strong>Data Handling</strong></td>
+            <td style="padding: 10px;">
+                In-Memory Storage <br>
+                <small style="color: #666;">Uses Python dictionaries and lists to manage task data efficiently in real-time.</small>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

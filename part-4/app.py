@@ -6,46 +6,37 @@ How to Run:
 2. Run: python app.py
 3. Try different URLs like /user/YourName or /post/123
 """
-
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
-
+# --- MAIN ROUTES ---
 @app.route('/')
 def home():
     return render_template('index.html')
 
+@app.route('/about/')
+def about():
+    return render_template('about.html')
 
-@app.route('/user/<username>')  # <username> captures any text from URL, visit: /user/Alice, /user/Bob
+@app.route('/user/<username>')
 def user_profile(username):
     return render_template('user.html', username=username)
 
-
-@app.route('/post/<int:post_id>')  # <int:post_id> captures only integers, /post/abc returns 404
+@app.route('/post/<int:post_id>')
 def show_post(post_id):
-    posts = {  # Simulated post data (in real apps, this comes from a database)
+    posts = {
         1: {'title': 'Getting Started with Flask', 'content': 'Flask is a micro-framework...'},
         2: {'title': 'Understanding Routes', 'content': 'Routes map URLs to functions...'},
         3: {'title': 'Working with Templates', 'content': 'Jinja2 makes HTML dynamic...'},
     }
-    post = posts.get(post_id)  # Get the post or None if not found
-    return render_template('post.html', post_id=post_id, post=post)
+    post = posts.get(post_id)
+    return render_template('post.html', post=post, post_id=post_id)
 
-
-@app.route('/user/<username>/post/<int:post_id>')  # Multiple dynamic segments, visit: /user/Alice/post/1
-def user_post(username, post_id):
-    return render_template('user_post.html', username=username, post_id=post_id)
-
-
-@app.route('/about/')  # Trailing slash means both /about and /about/ work
-def about():
-    return render_template('about.html')
-
-
-@app.route('/links')  # Demonstrates url_for() - generates URLs dynamically (better than hardcoding!)
+@app.route('/links')
 def show_links():
-    links = {
+    # These keys must match the ones used in links.html (e.g., links.user_alice)
+    links_data = {
         'home': url_for('home'),
         'about': url_for('about'),
         'user_alice': url_for('user_profile', username='Alice'),
@@ -53,8 +44,64 @@ def show_links():
         'post_1': url_for('show_post', post_id=1),
         'post_2': url_for('show_post', post_id=2),
     }
-    return render_template('links.html', links=links)
+    return render_template('links.html', links=links_data)
 
+# --- EXERCISE 4.1: PRODUCT PAGE ---
+@app.route('/product/')
+def product():
+    return render_template('product.html')
+
+@app.route('/product/<int:product_id>')
+def show_product(product_id):
+    products = {
+        1: {'name': 'Laptop', 'price': 55000},
+        2: {'name': 'Mobile', 'price': 25000},
+        3: {'name': 'Headphones', 'price': 3000},
+    }
+    product_data = products.get(product_id)
+    return render_template('product.html', product=product_data, product_id=product_id)
+
+# --- EXERCISE 4.2: CATEGORY SECTION ---
+@app.route('/categories/')
+def show_categories():
+    # This data is sent to categories.html
+    categories_list = {
+        "electronics": [1, 2],
+        "audio_devices": [3]
+    }
+    return render_template('categories.html', categories=categories_list)
+
+@app.route('/categories/<category_name>/product/<int:product_id>')
+def category_product(category_name, product_id):
+    # This nested dictionary allows us to find a product INSIDE a category
+    categories_data = {
+        "electronics": {
+            1: {"name": "Laptop", "price": 50000},
+            2: {"name": "Phone", "price": 20000}
+        },
+        "audio_devices": {
+            3: {"name": "Headphones", "price": 3000}
+        }
+    }
+    # Get the category, then get the product inside it
+    category_dict = categories_data.get(category_name, {})
+    product_data = category_dict.get(product_id)
+    
+    return render_template(
+        'category_product.html',
+        category=category_name,
+        product=product_data,
+        product_id=product_id
+    )
+
+# --- EXERCISE 4.3: SEARCH ROUTE ---
+@app.route('/search')
+def search():
+    query = request.args.get('query', '')
+    # Optional: logic to search through a list
+    items = ["Laptop", "Mobile", "Headphones", "Flask Tutorial"]
+    results = [i for i in items if query.lower() in i.lower()] if query else []
+    return render_template('search.html', query=query, results=results)
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -91,3 +138,14 @@ if __name__ == '__main__':
 #   - Bonus: Add a simple search form that redirects to this route
 #
 # =============================================================================
+
+
+
+
+
+
+
+
+
+
+

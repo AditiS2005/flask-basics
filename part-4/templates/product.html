@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product {{ product_id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #edf2f7;
+            border-radius: 5px;
+        }
+        nav a {
+            margin-right: 15px;
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .route-demo {
+            background: #ebf8ff;
+            border: 2px solid #90cdf4;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .route-demo h3 {
+            margin-top: 0;
+            color: #2b6cb0;
+        }
+        .route-demo a {
+            display: inline-block;
+            margin: 5px 10px 5px 0;
+            padding: 8px 16px;
+            background: #4299e1;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .route-demo a:hover {
+            background: #3182ce;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .product-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        .not-found {
+            background: #fed7d7;
+            border: 1px solid #fc8181;
+            color: #c53030;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .info-box {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        code {
+            background: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .product-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 10px;     /* move product up */
+            margin-bottom: 40px;  /* space before info */
+        }
+
+        .info-box {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 15px;
+            margin-top: 30px;     /* push info down */
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about/">About</a>
+        <a href="/links">URL Builder</a>
+        <a href="/product/">Products</a>
+        <a href="/categories">Categories</a>
+        
+    </nav>
+
+    <div class="route-demo">
+            <!-- <h3>Try Products</h3>
+            <p>Route: <code>/product/&lt;int:product_id&gt;</code></p> -->
+            <!-- <div class="code-block">
+                @app.route('/product/&lt;int:product_id&gt;')<br>
+                def product():<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return render_template('product.html')
+            </div> -->
+            <h3>Products</h3>
+            <ul>
+                <li><a href="/product/1">Laptop</a></li>
+                <li><a href="/product/2">Mobile</a></li>
+                <li><a href="/product/3">Headphones</a></li>
+                <li><a href="/product/99">Other Products</a></li>
+            </ul>
+    </div>
+    {% if product is defined %}
+
+        {% if product %}
+            <div class="product-card">
+                <h2>{{ product.name }}</h2>
+                <p><strong>Price:</strong> ₹{{ product.price }}</p>
+                <p><strong>Product ID:</strong> {{ product_id }}</p>
+            </div>
+
+            <!-- <div class="info-box">
+                <p>This page was opened using:</p>
+                <code>/product/{{ product_id }}</code>
+            </div> -->
+
+        {% else %}
+            <div class="not-found">
+                <h2>Product Not Found/ Available</h2>
+                <p>Product ID {{ product_id }} does not exist.</p>
+            </div>
+        {% endif %}
+
+    {% endif %}
+
+    
+</div>
+</body>
+</html>

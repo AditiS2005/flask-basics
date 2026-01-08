@@ -7,19 +7,24 @@ How to Run:
 3. Open browser: http://localhost:5000
 """
 
-from flask import Flask, render_template  # render_template lets us serve HTML files
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    return render_template('index.html')  # Flask looks in 'templates/' folder for this file
+    return render_template('index.html')
 
 
 @app.route('/about')
 def about():
-    return render_template('about.html')  # Renders templates/about.html
+    return render_template('about.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 
 if __name__ == '__main__':
@@ -32,12 +37,12 @@ if __name__ == '__main__':
 #
 # part-2/
 # ├── app.py              <- You are here
-# └── templates/          <- Flask looks here for HTML files
-#     ├── index.html      <- Home page template
-#     └── about.html      <- About page template
+# └── templates/
+#     ├── index.html      <- Home page
+#     ├── about.html      <- About page
+#     └── contact.html   <- Contact page
 #
 # =============================================================================
-
 # =============================================================================
 # EXERCISES:
 # =============================================================================
@@ -55,4 +60,3 @@ if __name__ == '__main__':
 #   - Add <a href="/"> and <a href="/about"> links to both pages
 #   - Test clicking between pages
 #
-# =============================================================================

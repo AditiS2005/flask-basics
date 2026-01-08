@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category & Product</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        .section {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            background: #f7fafc;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        a {
+            text-decoration: none;
+            color: purple;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="section">
+    <h2>Category</h2>
+    <p>{{ category.replace('_', ' ').title() }}</p>
+</div>
+
+<div class="section">
+    <h2>Product</h2>
+
+    {% if product %}
+        <p><strong>Name:</strong> {{ product.name }}</p>
+        <p><strong>Price:</strong> ₹{{ product.price }}</p>
+        <p><strong>Product ID:</strong> {{ product_id }}</p>
+    {% else %}
+        <p>Product Not Found</p>
+    {% endif %}
+</div>
+
+<a href="{{ url_for('show_categories') }}">⬅ Back to Categories</a>
+
+</body>
+</html>

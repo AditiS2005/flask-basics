@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Blog | {{ info.name }}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>My Blog</h2>
+    <p>Sharing my learning journey in tech 🚀</p>
+</div>
+
+{% for post in posts %}
+<div class="card">
+    <h3>{{ post.title }}</h3>
+    <small>{{ post.date }}</small>
+    <p style="margin-top: 10px;">{{ post.content }}</p>
+</div>
+{% endfor %}
+{% endblock %}

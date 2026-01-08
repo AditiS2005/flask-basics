@@ -14,23 +14,31 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    student_name = "Alex"
+    student_name = "Aditi"
     return render_template('index.html', name=student_name)  # Pass variable to template as {{ name }}
 
 
 @app.route('/profile')
 def profile():
     user_data = {
-        'name': 'Sarah',
-        'age': 22,
+        'name': 'Aditi',
+        'age': 20,
         'course': 'Web Development',
+        'email': 'aditigite2005@gmail.com',
+        'city': 'Nashik',
         'is_enrolled': True
     }
-    return render_template('profile.html',  # Pass multiple variables to template
-                           name=user_data['name'],
-                           age=user_data['age'],
-                           course=user_data['course'],
-                           is_enrolled=user_data['is_enrolled'])
+
+    return render_template(
+        'profile.html',
+        name=user_data['name'],
+        age=user_data['age'],
+        course=user_data['course'],
+        email=user_data['email'],
+        city=user_data['city'],
+        is_enrolled=user_data['is_enrolled']
+    )
+
 
 
 @app.route('/skills')
@@ -38,15 +46,26 @@ def skills():
     programming_skills = ['Python', 'HTML', 'CSS', 'JavaScript', 'Flask']
     return render_template('skills.html', skills=programming_skills)  # Pass list to loop through in template
 
+@app.route('/grades')
+def grades():
+    grades_data = {
+        'Mathematics': 'O',
+        'Physics': 'A+',
+        'Computer Science': 'A+',
+        'Web Development': 'O',
+        'Data Structures': 'O'
+    }
 
-@app.route('/projects')
-def projects():
-    project_list = [  # List of dictionaries - common pattern for database-like data
-        {'name': 'Personal Website', 'status': 'Completed', 'tech': 'HTML/CSS'},
-        {'name': 'Flask Blog', 'status': 'In Progress', 'tech': 'Python/Flask'},
-        {'name': 'Weather App', 'status': 'Planned', 'tech': 'JavaScript'},
-    ]
-    return render_template('projects.html', projects=project_list)
+    return render_template('grades.html', grades=grades_data)
+
+#@app.route('/projects')
+#def projects():
+#   project_list = [  # List of dictionaries - common pattern for database-like data
+#        {'name': 'Personal Website', 'status': 'Completed', 'tech': 'HTML/CSS'},
+#        {'name': 'Flask Blog', 'status': 'In Progress', 'tech': 'Python/Flask'},
+#        {'name': 'Weather App', 'status': 'Planned', 'tech': 'JavaScript'},
+#    ]
+#    return render_template('projects.html', projects=project_list)
 
 
 if __name__ == '__main__':

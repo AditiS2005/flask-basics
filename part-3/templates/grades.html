@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grades</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #edf2f7;
+        }
+        nav a {
+            margin-right: 15px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/skills">Skills</a>
+        <!--<a href="/projects">Projects</a>-->
+        <a href="/grades">Grades</a>
+    </nav>
+
+    <h1>Student Grades 📊</h1>
+
+    <table>
+        <tr>
+            <th>Subject</th>
+            <th>Grade</th>
+        </tr>
+
+        {% for subject, grade in grades.items() %}
+        <tr>
+            <td>{{ subject }}</td>
+            <td>{{ grade }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><strong>Total Subjects:</strong> {{ grades|length }}</p>
+</div>
+
+</body>
+</html>

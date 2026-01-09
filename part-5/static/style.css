@@ -1,367 +1,287 @@
-/* =============================================================================
-Personal Website Styles - Exercise 5.3 Enhanced
-=============================================================================
-*/
+/* =========================================================
+   Personal Website – Luxury Pastel Portfolio Theme
+========================================================= */
 
 :root {
-    /* Modern Color Palette */
-    --primary-gradient: linear-gradient(135deg, #059669 0%, #10b981 100%); /* Emerald */
-    --primary-color: #10b981;
-    --secondary-color: #64748b;
-    --nav-bg: #0f172a;       /* Deep Midnight Blue */
-    --bg-color: #f1f5f9;     /* Soft Gray/Blue background */
-    --card-bg: #ffffff;
-    --text-main: #1e293b;    /* Slate 800 */
-    --text-muted: #64748b;
-    --accent-purple: #7c3aed; /* For highlights */
+    /* Main Theme Colors */
+    --gradient-main: linear-gradient(135deg, #8b5cf6, #ec4899); /* Violet to Pink */
+    --gradient-soft: linear-gradient(135deg, #fbcfe8, #ddd6fe);
     
-    /* Global Settings */
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --radius: 12px;
+    /* NEW: Skill Specific Palette (Emerald/Teal) */
+    --gradient-skill: linear-gradient(135deg, #10b981, #3b82f6);
+    --skill-text: #065f46;
+    --skill-bg-light: #ecfdf5;
+
+    /* NEW: Project Specific Palette (Amber/Orange) */
+    --gradient-project: linear-gradient(135deg, #f59e0b, #ef4444);
+    --project-text: #9a3412;
+    --project-bg-light: #fff7ed;
+
+    --primary-color: #8b5cf6;
+    --accent-color: #ec4899;
+    --bg-main: #f9fafb;
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --nav-bg: #0f172a;
+
+    --radius: 18px;
+    --shadow-light: 0 12px 30px rgba(0,0,0,0.08);
+    --shadow-hover: 0 25px 45px rgba(0,0,0,0.15);
 }
 
-/* Base Styles */
+/* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-    line-height: 1.6;
-    background-color: var(--bg-color);
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: var(--bg-main);
     color: var(--text-main);
+    line-height: 1.7;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    min-height: calc(100vh - 160px);
-}
-
-/* Navigation */
+/* ================= NAVBAR ================= */
 .navbar {
-    background-color: var(--nav-bg);
-    padding: 1rem 2rem;
+    background: var(--nav-bg);
+    padding: 1.2rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
 }
 
 .nav-brand a {
+    font-size: 1.7rem;
+    font-weight: 800;
     color: white;
     text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -1px;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 1.5rem;
+    gap: 1.8rem;
 }
 
 .nav-links a {
-    color: #94a3b8;
+    color: #c7d2fe;
     text-decoration: none;
     font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: all 0.3s;
+    position: relative;
 }
 
-.nav-links a:hover, .nav-links a.active {
-    color: white;
-    background: rgba(255,255,255,0.1);
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    height: 3px; width: 0;
+    background: var(--gradient-main);
+    left: 0; bottom: -6px;
+    transition: width 0.3s ease;
 }
 
-/* Hero Section */
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* ================= HERO ================= */
 .hero {
+    background: var(--gradient-soft);
+    padding: 100px 30px;
+    border-radius: 22px;
     text-align: center;
-    padding: 80px 20px;
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 2rem;
+    box-shadow: var(--shadow-light);
+    margin: 3rem auto;
+    max-width: 1100px;
 }
 
 .hero h1 {
-    font-size: 3rem;
-    background: var(--primary-gradient);
+    font-size: 3.3rem;
+    font-weight: 800;
+    background: var(--gradient-main);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
 }
 
-/* Cards */
+/* ================= CONTAINER & CARDS ================= */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
 .card {
     background: var(--card-bg);
-    padding: 2rem;
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 2rem;
-    transition: transform 0.2s ease;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow-light);
+    transition: all 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
 }
 
 .card h2 {
-    color: var(--text-main);
+    font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    border-bottom: 3px solid var(--primary-color);
-    display: inline-block;
-    padding-bottom: 5px;
+    position: relative;
 }
 
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-primary { 
-    background: var(--primary-gradient); 
-    color: white; 
-}
-
-.btn-secondary { 
-    background: #e2e8f0; 
-    color: var(--text-main); 
-}
-
-.btn:hover { 
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
-/* Skills & Projects */
-.skill-bar {
-    background: #e2e8f0;
-    height: 12px;
+.card h2::after {
+    content: "";
+    width: 70px; height: 4px;
+    background: var(--gradient-main);
+    position: absolute;
+    left: 0; bottom: -8px;
     border-radius: 10px;
-    margin: 10px 0 20px;
+}
+
+/* ================= SKILLS (Emerald/Blue Theme) ================= */
+.skill-item {
+    margin-bottom: 25px;
+}
+
+.skill-name {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.skill-name a {
+    color: var(--skill-text);
+    text-decoration: none;
+}
+
+.skill-bar {
+    background: #e5e7eb;
+    height: 14px;
+    border-radius: 999px;
+    overflow: hidden;
 }
 
 .skill-progress {
-    background: var(--primary-gradient);
     height: 100%;
-    border-radius: 10px;
+    background: var(--gradient-skill); /* Distinct Skill Color */
+    transition: width 1.5s ease-in-out;
 }
 
+/* ================= PROJECTS (Amber/Orange Theme) ================= */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
+}
+
+.project-card {
+    border: 1px solid #fed7aa; /* Light orange border */
+}
+
+.project-card h3 {
+    color: var(--project-text);
+    margin-bottom: 10px;
 }
 
 .tech-tag {
-    background: #ecfdf5;
-    color: #065f46;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    border: 1px solid #d1fae5;
+    display: inline-block;
+    background: var(--project-bg-light);
+    color: var(--project-text);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin: 4px 2px;
+    border: 1px solid #fdba74;
 }
 
 .tech-tag.highlight {
-    background: var(--accent-purple);
+    background: var(--gradient-project); /* Distinct Project Color */
     color: white;
-    border-color: var(--accent-purple);
+    border: none;
 }
 
-/* Status Badges */
-.status {
-    font-size: 0.75rem;
-    padding: 2px 10px;
-    border-radius: 12px;
-    text-transform: uppercase;
-    font-weight: 700;
+/* ================= BUTTONS ================= */
+.btn {
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
 }
-.status-completed { background: #dcfce7; color: #166534; }
-.status-in-progress { background: #fef9c3; color: #854d0e; }
 
-/* Footer */
+.btn-primary {
+    background: var(--gradient-main);
+    color: white;
+}
+
+.project-card .btn-primary {
+    background: var(--gradient-project); /* Project buttons use the project color */
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+/* ================= FOOTER ================= */
 .footer {
     background: var(--nav-bg);
-    color: #94a3b8;
+    color: #c7d2fe;
     text-align: center;
-    padding: 3rem 1rem;
-    margin-top: 4rem;
+    padding: 3.5rem 1rem;
+    margin-top: 5rem;
 }
 
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-    .navbar { flex-direction: column; gap: 1rem; }
-    .hero h1 { font-size: 2rem; }
-}
-
-<<<<<<< HEAD
-/* Add to the bottom of style.css */
-.blog-container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-top: 20px;
-}
-
-.blog-card {
-    border-left: 5px solid var(--primary-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.blog-card:hover {
-    transform: translateX(8px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.category-badge {
-    background: #e0e7ff;
-    color: #4338ca;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-=======
-/* static/style.css */
-
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #64748b;
-    --bg-color: #f8fafc;
-    --card-bg: #ffffff;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --accent-success: #22c55e;
-    --nav-bg: #1e293b;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background-color: var(--bg-color);
-    color: var(--text-main);
-}
-
-.navbar {
-    background-color: var(--nav-bg);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: #cbd5e1;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.nav-links a.active, .nav-links a:hover {
-    color: white;
-    font-weight: bold;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.card {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s;
-}
-
-.btn-primary { background: var(--primary-color); color: white; }
-.btn-secondary { background: var(--secondary-color); color: white; }
-.btn:hover { transform: translateY(-2px); }
-
-/* Skill Bars Styling */
-.skill-bar {
-    background: #e2e8f0;
-    height: 10px;
-    border-radius: 5px;
-    margin: 10px 0 20px;
-}
-
-.skill-progress {
-    background: var(--primary-color);
-    height: 100%;
-    border-radius: 5px;
-}
-
-/* Mobile Responsive Adjustments */
+/* Tablet & Mobile (under 768px) */
 @media (max-width: 768px) {
     .navbar {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: column; /* Stack logo and links */
+        padding: 1rem;
     }
 
     .nav-links {
-        gap: 10px;
-        font-size: 0.9rem;
+        margin-top: 15px;
+        gap: 0.8rem;
+        flex-wrap: wrap; /* Wrap links if they don't fit */
+        justify-content: center;
     }
 
-    .projects-grid {
-        display: grid;
-        grid-template-columns: 1fr; /* Single column on mobile */
-        gap: 20px;
+    .hero {
+        padding: 40px 15px;
     }
 
     .hero h1 {
-        font-size: 2rem;
+        font-size: 2rem; /* Smaller text for mobile */
     }
-}
 
-/* Desktop Grid for Projects */
-@media (min-width: 769px) {
+    .card {
+        padding: 1.5rem; /* Less padding to save space */
+    }
+
     .projects-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
+        grid-template-columns: 1fr; /* Single column for projects */
     }
 }
 
-.tech-tag.highlight {
-    background: #764ba2; /* Purple from your gradient */
-    color: white;
-    border: 1px solid #667eea;
->>>>>>> 75959308eb8c7121d80e212da4f8cc71e780f610
+/* Small Mobile (under 480px) */
+@media (max-width: 480px) {
+    .nav-links {
+        font-size: 0.8rem;
+    }
+
+    .hero h1 {
+        font-size: 1.7rem;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons on tiny screens */
+        margin-bottom: 10px;
+    }
 }

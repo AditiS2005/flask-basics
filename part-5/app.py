@@ -97,25 +97,6 @@ def blog():
 
 @app.route('/skill/<skill_name>')
 def skill(skill_name):
-    related_projects = [
-        project for project in PROJECTS
-        if skill_name in project['tech']
-    ]
-
-    return render_template(
-        'skill.html',
-        info=PERSONAL_INFO,
-        skill=skill_name,
-        projects=related_projects
-    )
-
-
-@app.route('/blog')
-def blog():
-    return render_template('blog.html', info=PERSONAL_INFO, posts=BLOG_POSTS)
-
-@app.route('/skill/<skill_name>')
-def skill(skill_name):
     # Convert 'HTML-CSS' back to 'HTML/CSS' for matching
     original_skill_name = skill_name.replace('-', '/')
     

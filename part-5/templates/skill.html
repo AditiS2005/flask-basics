@@ -14,28 +14,20 @@
 {% if projects %}
     <div class="projects-grid">
         {% for project in projects %}
-        <div class="project-card">
-            <h3>{{ project.name }}</h3>
+        <div class="card"> <h3>{{ project.name }}</h3>
             <p>{{ project.description }}</p>
             
-            <div class="tech-tags">
+            <div class="tech-tags" style="margin: 15px 0;">
                 {% for tech in project.tech %}
-<<<<<<< HEAD
-                    <a href="{{ url_for('skill', skill_name=tech) }}" style="text-decoration: none;">
+                    {# We use |replace('/', '-') to handle skills like HTML/CSS in the URL #}
+                    <a href="{{ url_for('skill', skill_name=tech|replace('/', '-')) }}" style="text-decoration: none;">
                         <span class="tech-tag {% if tech.lower() == skill_name.lower() %}highlight{% endif %}">
                             {{ tech }}
                         </span>
                     </a>
                 {% endfor %}
             </div>
-=======
-                    <span class="tech-tag {% if tech.lower() == skill_name.lower() %}highlight{% endif %}">
-                        {{ tech }}
-                    </span>
-                {% endfor %}
-            </div>
-            
->>>>>>> 75959308eb8c7121d80e212da4f8cc71e780f610
+
             <div style="margin-top: 15px;">
                 <a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn btn-primary">
                     View Project

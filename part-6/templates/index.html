@@ -1,37 +1,49 @@
 {% extends "base.html" %}
-
 {% block content %}
-    
-    <h2>My Tasks</h2>
-    <div class="projects-grid">
-        {% for task in tasks %}
-        <div class="project-card">
-            <h3>{{ task.title|upper }}</h3>
-            <p class="due-date">📅 Due: {{ task.due_date }}</p>
-            <p>Priority: <span class="tech-tag">{{ task.priority }}</span></p>
-            <p>Status: <span class="status {% if task.status == 'Completed' %}status-completed{% else %}status-in-progress{% endif %}">{{ task.status }}</span></p>
-            
-            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
-                <a href="{{ url_for('task_detail', id=task.id) }}" class="btn btn-primary">View</a>
-                <a href="{{ url_for('delete_task', id=task.id) }}" class="btn btn-danger" onclick="return confirm('Delete this task?')">Delete</a>
-            </div>
-        </div>
-        {% endfor %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>My Task Dashboard</h2>
+        <a href="{{ url_for('add_task') }}" class="btn btn-primary">+ Add New Task</a>
     </div>
 
-    <h2>Dashboard</h2>
-    <div class="stats-container">
-        <div class="stat-card">
-            <h4>Total Tasks</h4>
-            <p>{{ stats.total }}</p>
-        </div>
-        <div class="stat-card" style="border-top-color: #48bb78;">
-            <h4>Completed</h4>
-            <p>{{ stats.completed }}</p>
-        </div>
-        <div class="stat-card" style="border-top-color: #ed8936;">
-            <h4>Pending</h4>
-            <p>{{ stats.pending }}</p>
-        </div>
+    <div style="overflow-x: auto;">
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td style="font-weight: bold;">{{ task.title|upper }}</td>
+                    <td><span class="due-date-cell">{{ task.due_date }}</span></td>
+                    <td><span class="tech-tag">{{ task.priority }}</span></td>
+                    <td>
+                        <span class="status {% if task.status == 'Completed' %}status-completed{% else %}status-in-progress{% endif %}">
+                            {{ task.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 8px;">
+                            <a href="{{ url_for('edit_task', id=task.id) }}" class="btn-sm btn-edit" style="background:#4a5568; color:white; text-decoration:none; padding:5px 10px; border-radius:4px;">Edit</a>
+                            <a href="{{ url_for('delete_task', id=task.id) }}" class="btn-sm btn-danger" onclick="return confirm('Delete?')" style="background:#e53e3e; color:white; text-decoration:none; padding:5px 10px; border-radius:4px;">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
+
+<div class="stats-container">
+    <div class="stat-card"><h4>Total</h4><p>{{ stats.total }}</p></div>
+    <div class="stat-card" style="border-top-color: #48bb78;"><h4>Completed</h4><p>{{ stats.completed }}</p></div>
+    <div class="stat-card" style="border-top-color: #ed8936;"><h4>Pending</h4><p>{{ stats.pending }}</p></div>
+</div>
 {% endblock %}

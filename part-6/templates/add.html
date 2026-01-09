@@ -3,17 +3,23 @@
 <div class="card">
     <h2>Add New Task</h2>
     <form method="POST">
-        <label>Task Title:</label><br>
-        <input type="text" name="title" required style="width:100%; padding:10px; margin:10px 0;"><br>
+        <label>Task Title:</label>
+        <input type="text" name="title" required class="form-input" placeholder="What needs to be done?">
         
-        <label>Priority:</label><br>
-        <select name="priority" style="width:100%; padding:10px; margin:10px 0;">
+        <label>Due Date:</label>
+        <input type="date" name="due_date" required class="form-input">
+        
+        <label>Priority:</label>
+        <select name="priority" class="form-input">
             <option value="High">High</option>
-            <option value="Medium">Medium</option>
+            <option value="Medium" selected>Medium</option>
             <option value="Low">Low</option>
-        </select><br>
+        </select>
         
-        <button type="submit" class="btn btn-primary">Save Task</button>
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn btn-primary">Save Task</button>
+            <a href="{{ url_for('index') }}" class="btn" style="background: #ccc; color: #333; text-decoration: none;">Cancel</a>
+        </div>
     </form>
 </div>
 {% endblock %}

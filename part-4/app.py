@@ -4,13 +4,14 @@ Part 4: Dynamic Routes - URL Parameters
 How to Run:
 1. Make sure venv is activated
 2. Run: python app.py
-3. Try different URLs like /user/YourName or /post/123
+3. Open: http://127.0.0.1:5000/
 """
+
 from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
-# --- MAIN ROUTES ---
+# ---------------- MAIN ROUTES ----------------
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -35,7 +36,6 @@ def show_post(post_id):
 
 @app.route('/links')
 def show_links():
-    # These keys must match the ones used in links.html (e.g., links.user_alice)
     links_data = {
         'home': url_for('home'),
         'about': url_for('about'),
@@ -46,10 +46,10 @@ def show_links():
     }
     return render_template('links.html', links=links_data)
 
-# --- EXERCISE 4.1: PRODUCT PAGE ---
+# ---------------- PRODUCT ROUTES ----------------
 @app.route('/product/')
 def product():
-    return render_template('product.html')
+    return render_template('product.html', product=None, product_id=None)
 
 @app.route('/product/<int:product_id>')
 def show_product(product_id):
@@ -59,12 +59,15 @@ def show_product(product_id):
         3: {'name': 'Headphones', 'price': 3000},
     }
     product_data = products.get(product_id)
-    return render_template('product.html', product=product_data, product_id=product_id)
+    return render_template(
+        'product.html',
+        product=product_data,
+        product_id=product_id
+    )
 
-# --- EXERCISE 4.2: CATEGORY SECTION ---
+# ---------------- CATEGORY ROUTES ----------------
 @app.route('/categories/')
 def show_categories():
-    # This data is sent to categories.html
     categories_list = {
         "electronics": [1, 2],
         "audio_devices": [3]
@@ -73,7 +76,6 @@ def show_categories():
 
 @app.route('/categories/<category_name>/product/<int:product_id>')
 def category_product(category_name, product_id):
-    # This nested dictionary allows us to find a product INSIDE a category
     categories_data = {
         "electronics": {
             1: {"name": "Laptop", "price": 50000},
@@ -83,10 +85,9 @@ def category_product(category_name, product_id):
             3: {"name": "Headphones", "price": 3000}
         }
     }
-    # Get the category, then get the product inside it
-    category_dict = categories_data.get(category_name, {})
-    product_data = category_dict.get(product_id)
-    
+
+    product_data = categories_data.get(category_name, {}).get(product_id)
+
     return render_template(
         'category_product.html',
         category=category_name,
@@ -94,58 +95,14 @@ def category_product(category_name, product_id):
         product_id=product_id
     )
 
-# --- EXERCISE 4.3: SEARCH ROUTE ---
+# ---------------- SEARCH ROUTE ----------------
 @app.route('/search')
 def search():
     query = request.args.get('query', '')
-    # Optional: logic to search through a list
     items = ["Laptop", "Mobile", "Headphones", "Flask Tutorial"]
     results = [i for i in items if query.lower() in i.lower()] if query else []
     return render_template('search.html', query=query, results=results)
 
+# ---------------- RUN APP ----------------
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-# =============================================================================
-# URL PARAMETER TYPES:
-# =============================================================================
-#
-# <variable>         - String (default), accepts any text without slashes
-# <int:variable>     - Integer, accepts only positive integers
-# <float:variable>   - Float, accepts floating point numbers
-# <path:variable>    - String, but also accepts slashes
-# <uuid:variable>    - UUID strings
-#
-# =============================================================================
-
-# =============================================================================
-# EXERCISES:
-# =============================================================================
-#
-# Exercise 4.1: Create a product page
-#   - Add route /product/<int:product_id>
-#   - Create a products dictionary with id, name, price
-#   - Display product details or "Not Found" message
-#
-# Exercise 4.2: Category and product route
-#   - Add route /category/<category_name>/product/<int:product_id>
-#   - Display both the category and product information
-#
-# Exercise 4.3: Search route
-#   - Add route /search/<query>
-#   - Display "Search results for: [query]"
-#   - Bonus: Add a simple search form that redirects to this route
-#
-# =============================================================================
-
-
-
-
-
-
-
-
-
-
-

@@ -14,7 +14,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 # =============================================================================
-# YOUR DATA - Customize this section with your own information!
+# YOUR DATA 
 # =============================================================================
 
 PERSONAL_INFO = {
@@ -63,12 +63,12 @@ def home():
     return render_template('index.html', info=PERSONAL_INFO)
 
 
-@app.route('/about')
+@app.route('/about/')
 def about():
     return render_template('about.html', info=PERSONAL_INFO, skills=SKILLS)
 
 
-@app.route('/projects')
+@app.route('/projects/')
 def projects():
     return render_template('projects.html', info=PERSONAL_INFO, projects=PROJECTS)
 
@@ -83,11 +83,11 @@ def project_detail(project_id):
     return render_template('project_detail.html', info=PERSONAL_INFO, project=project, project_id=project_id)
 
 
-@app.route('/contact')
+@app.route('/contact/')
 def contact():
     return render_template('contact.html', info=PERSONAL_INFO)
 
-@app.route('/blog')
+@app.route('/blog/')
 def blog():
     return render_template(
         'blog.html',
